@@ -1,10 +1,32 @@
+import Landing from "./landingpage";
+import { IoPersonSharp } from "react-icons/io5";
+
+const lastname = "gogo";
 
 function Register() {
+  
+  localStorage.setItem("gogo", lastname);
+  console.log (localStorage.getItem(lastname))
 
     return (
       <>
+
         <div className="regpic">
-          <div className="image"></div>
+
+          <div className="search">
+            <div className="profile">
+              <div className="logo"><a href="">Logo</a></div>   
+              <input type="text" className="searchbar" placeholder="Search.." name="search"/>
+              <button type="submit">Submit</button>
+              <div className="frame"><IoPersonSharp className="icon"/></div>
+            </div>
+              
+            <div className="person">
+              <input type="text" placeholder="Name and Surname"/>
+              <input type="text" placeholder="Position"/>
+            </div>
+          </div>
+
           <div className="form">
             <h2><i>Registration Form</i></h2>
             <div className="details">
@@ -59,6 +81,7 @@ function Register() {
               <button>Submit</button>
             </div>
           </div>
+          <Landing/>
         </div>
       </>
     )
