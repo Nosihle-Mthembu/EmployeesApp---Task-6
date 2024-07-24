@@ -8,6 +8,10 @@ function Register() {
   localStorage.setItem("gogo", lastname);
   console.log (localStorage.getItem(lastname))
 
+  function RegSubmit(){
+    
+  }
+
     return (
       <>
 
@@ -78,7 +82,7 @@ function Register() {
             </div>
           
             <div className="btn">
-              <button>Submit</button>
+              <button onClick={RegSubmit}>Submit</button>
             </div>
           </div>
           <Landing/>
