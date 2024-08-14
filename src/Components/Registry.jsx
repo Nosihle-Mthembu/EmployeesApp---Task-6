@@ -1,15 +1,29 @@
+import { useState } from "react";
 import Landing from "./landingpage";
 import { IoPersonSharp } from "react-icons/io5";
 
-const lastname = "gogo";
-
 function Register() {
   
-  localStorage.setItem("gogo", lastname);
-  console.log (localStorage.getItem(lastname))
+  // localStorage.setItem("gogo", lastname);
+  // console.log (localStorage.getItem(lastname))
+  const [name,setName] = useState([""])
+  const [surname,setSurname] = useState([""])
+  const [email,setEmail] = useState([""])
+  const [phone,setPhone] = useState([""])
+  const [position,setPosition] = useState([""])
 
-  function RegSubmit(){
-    
+  function RegSubmit(event){
+    event.preventDefault()
+
+    const form = {
+      name:name,
+      surname:surname,
+      email:email,
+      phone:phone,
+      position:position,
+    };
+     
+    console.log(form);
   }
 
     return (
@@ -39,8 +53,8 @@ function Register() {
             </div>
 
             <div className="details">
-              <input type="text" /> 
-              <input type="text" />
+              <input type="text" value={name} onChange={(event)=>setName(event.target.value)}/> 
+              <input type="text" value={surname} onChange={(event)=>setSurname(event.target.value)}/>
             </div>
 
             <div>
@@ -49,7 +63,7 @@ function Register() {
             </div>
 
             <div className="details">
-              <input type="text" placeholder="City"/>
+              <input type="text" placeholder="City" />
               <input type="text" placeholder="Code"/>
             </div>
 
@@ -60,8 +74,8 @@ function Register() {
               </div>
               
               <div className="details">
-                <input type="text" />
-                <input type="tel" id="phone" name="phone" pattern="+27"/>
+                <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
+                <input type="tel" id="phone" name="phone" pattern="+27" value={phone} onChange={(event)=>setPhone(event.target.value)}/>
               </div>
             </div>     
 
@@ -72,7 +86,7 @@ function Register() {
     
             <div className="details">
               <form className='text dropdown'>
-                <select>
+                <select value={position} onChange={(event)=>setPosition(event.target.value)}>
                     <option value="general worker">General worker</option>
                     <option value="supervisor">Supervisor</option>
                     <option value="manager">Manager</option>
