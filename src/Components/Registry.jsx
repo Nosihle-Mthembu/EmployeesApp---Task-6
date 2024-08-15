@@ -1,16 +1,18 @@
 import { useState } from "react";
 import Landing from "./landingpage";
 import { IoPersonSharp } from "react-icons/io5";
+import { addBook } from "./local";
 
 function Register() {
   
   // localStorage.setItem("gogo", lastname);
   // console.log (localStorage.getItem(lastname))
-  const [name,setName] = useState([""])
-  const [surname,setSurname] = useState([""])
-  const [email,setEmail] = useState([""])
-  const [phone,setPhone] = useState([""])
-  const [position,setPosition] = useState([""])
+  const [name,setName] = useState("");
+  const [surname,setSurname] = useState("");
+  const [email,setEmail] = useState("");
+  const [phone,setPhone] = useState("");
+  const [position,setPosition] = useState("");
+  const [myForm, setMyForm] = useState(JSON.parse(localStorage.getItem('form')) || []);
 
   function RegSubmit(event){
     event.preventDefault()
@@ -22,8 +24,10 @@ function Register() {
       phone:phone,
       position:position,
     };
-     
-    console.log(form);
+    addBook(form)
+    setMyForm([...myForm, form]);
+      localStorage.setItem('form', JSON.stringify(myForm));
+ 
   }
 
     return (
