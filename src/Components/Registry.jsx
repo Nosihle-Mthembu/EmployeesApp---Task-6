@@ -43,8 +43,8 @@ function Register() {
             </div>
               
             <div className="person">
-              <input type="text" placeholder="Name and Surname"/>
-              <input type="text" placeholder="Position"/>
+              <i>Nosihle Mthembu</i><br/>
+              <i>Employee</i>
             </div>
           </div>
 
