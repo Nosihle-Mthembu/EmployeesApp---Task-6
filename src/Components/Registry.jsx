@@ -12,7 +12,7 @@ function Register() {
   const [email,setEmail] = useState("");
   const [phone,setPhone] = useState("");
   const [position,setPosition] = useState("");
-  const [myForm, setMyForm] = useState(JSON.parse(localStorage.getItem('form')) || []);
+  const [myForm, setMyForm] = useState(JSON.parse(localStorage.getItem('form')));
 
   function RegSubmit(event){
     event.preventDefault()
@@ -26,12 +26,11 @@ function Register() {
     };
     addBook(form)
     setMyForm([...myForm, form]);
-      localStorage.setItem('form', JSON.stringify(myForm));
- 
+      localStorage.setItem('form', JSON.stringify([...myForm, form]));
   }
-
+  // employee = JSON.parse(localStorage.getItem(myForm))
+ 
     return (
-      <>
 
         <div className="regpic">
 
@@ -91,6 +90,7 @@ function Register() {
             <div className="details">
               <form className='text dropdown'>
                 <select value={position} onChange={(event)=>setPosition(event.target.value)}>
+                    <option placeholder="eg. Worker"></option>
                     <option value="general worker">General worker</option>
                     <option value="supervisor">Supervisor</option>
                     <option value="manager">Manager</option>
@@ -103,9 +103,9 @@ function Register() {
               <button onClick={RegSubmit}>Submit</button>
             </div>
           </div>
-          <Landing/>
+          <Landing employee={myForm}/>
         </div>
-      </>
+
     )
   }
   

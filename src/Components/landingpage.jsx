@@ -1,8 +1,13 @@
 
-function Landing(){
+function Landing({employee}){
     // console.log(employee)
-    let employees = JSON.parse(localStorage.getItem("form"))
-    console.log(employees,"jhv")
+    
+    function handleDelete(){
+        console.log("fdbagueir")
+        const filtering = employee.filter((employer) => employer.name !== employer)
+        employee = filtering
+        localStorage.setItem("form",JSON.stringify(employee))
+    }
 
     return (
         <div className="employees">
@@ -25,13 +30,15 @@ function Landing(){
                 </tr>
                 </thead>
                 <tbody>
-                {employees.map((employer, index) => (
+                {employee.map((employer, index) => (
                 <tr key={index}>
-                    <td>{employees.name}  {employees.surname}</td>
-                    <td>{employees.email}</td>
-                    <td>{employees.phone}</td>
-                    <td>{employees.position}</td>
+                    <td>{employer.name}  {employer.surname}</td>
+                    <td>{employer.email}</td>
+                    <td>{employer.phone}</td>
+                    <td>{employer.position}</td>
                     <td>ID</td>
+                    <td><button onClick={handleDelete}>Delete</button></td>
+                    <td><button>Update</button></td>
                 </tr>
                 ))}
                 </tbody>
