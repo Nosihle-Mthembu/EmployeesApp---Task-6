@@ -1,4 +1,4 @@
-https://socialify.git.ci/Nosihle-Mthembu/Tryout/image?language=1&owner=1&name=1&stargazers=1&theme=Light
+<img src="https://socialify.git.ci/Nosihle-Mthembu/Tryout/image?language=1&owner=1&name=1&stargazers=1&theme=Light" alt="Tryout" width="640" height="320" />
 
 <h1>Employee App</h1>
 
