@@ -89,7 +89,7 @@ function Landing({ employee }) {
     const [email, setEmail] = useState(employee.email);
     const [phone, setPhone] = useState(employee.phone);
     const [position, setPosition] = useState(employee.position);
-    const [identity,setIdentity] = useState("");
+    const [identity,setIdentity] = useState(employee.identity);
 
   
     const handleSubmit = (event) => {
