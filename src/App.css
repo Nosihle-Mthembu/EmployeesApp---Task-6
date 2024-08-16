@@ -81,30 +81,22 @@ li a{
   height: 250px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  align-content: center;
-  justify-content: center;
 }
 
 .searchbar{
   border-radius: 10px;
   border: none;
+  margin-top: 15px;
 }
 
-.person input{
-  width: 200px;
-  height: 35px;
-  margin-top: 10px;
-}
-
-.frame{
+.person{
+  width: 130px;
+  height: 130px;
+  background-color: aqua;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
-  width: 150px;
-  height: 150px;
-  margin-top: 20px;
-  margin-left: 70px;
+  margin-left: 32%;
 }
 
 .icon{
@@ -112,8 +104,12 @@ li a{
   height: 100px;
 }
 
-.logo a{
-  color: black;
+.logo{
+  height: 150px;
+  width: 210px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 50px;
 }
 
 table{

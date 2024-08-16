@@ -12,6 +12,7 @@ function Register() {
   const [email,setEmail] = useState("");
   const [phone,setPhone] = useState("");
   const [position,setPosition] = useState("");
+  const [identity,setIdentity] = useState("");
   const [myForm, setMyForm] = useState(JSON.parse(localStorage.getItem('form')));
 
   function RegSubmit(event){
@@ -23,6 +24,7 @@ function Register() {
       email:email,
       phone:phone,
       position:position,
+      identity:identity
     };
     addBook(form)
     setMyForm([...myForm, form]);
@@ -36,20 +38,20 @@ function Register() {
 
           <div className="search">
             <div className="profile">
-              <div className="logo"><a href="">Logo</a></div>   
+              <div className="logo" style={{backgroundImage:`url(${require("../assets/Screenshot_16-8-2024_95035_www.brandcrowd.com-removebg-preview.png")})`}}></div>   
               <input type="text" className="searchbar" placeholder="Search.." name="search"/>
               <button type="submit">Submit</button>
-              <div className="frame"><IoPersonSharp className="icon"/></div>
-            </div>
-              
-            <div className="person">
-              <i>Nosihle Mthembu</i><br/>
-              <i>Employee</i>
             </div>
           </div>
 
           <div className="form">
             <h2><i>Registration Form</i></h2>
+
+             <div className="person">
+              {/* <div className="frame"></div> */}
+              <IoPersonSharp className="icon"/>
+            </div>
+
             <div className="details">
               <label htmlFor="text">Name</label>
               <label htmlFor="text">Surname</label>
@@ -58,16 +60,6 @@ function Register() {
             <div className="details">
               <input type="text" value={name} onChange={(event)=>setName(event.target.value)}/> 
               <input type="text" value={surname} onChange={(event)=>setSurname(event.target.value)}/>
-            </div>
-
-            <div>
-              <label htmlFor="text">Address</label><br />
-              <textarea name="" id=""></textarea>
-            </div>
-
-            <div className="details">
-              <input type="text" placeholder="City" />
-              <input type="text" placeholder="Code"/>
             </div>
 
             <div>
@@ -83,8 +75,8 @@ function Register() {
             </div>     
 
           <div className="details">
-            <label htmlFor="position">Position</label><br />
-            <div className='text'>When did you start?</div>
+            <label htmlFor="position">Employee Position</label><br />
+            <label htmlFor="text" style={{marginRight:30}}>Employee ID</label>
           </div>
     
             <div className="details">
@@ -96,7 +88,7 @@ function Register() {
                     <option value="manager">Manager</option>
                 </select>
             </form>
-            <input type="date" name="" id="" />
+            <input id="id" name="id" style={{marginLeft:50}} value={identity} onChange={(event)=>setIdentity(event.target.value)}/>
             </div>
           
             <div className="btn">
