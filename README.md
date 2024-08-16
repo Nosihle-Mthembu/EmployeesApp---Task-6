@@ -1,4 +1,6 @@
-# React + Vite
+https://socialify.git.ci/Nosihle-Mthembu/Tryout/image?language=1&owner=1&name=1&stargazers=1&theme=Light
+
+<h1>Employee App</h1>
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
