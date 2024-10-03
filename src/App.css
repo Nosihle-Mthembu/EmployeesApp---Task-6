@@ -4,7 +4,59 @@
   box-sizing: border-box;
 
 }
-html,body,#root{
+
+
+li a{
+  padding: 14px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.search{
+  background-color: rgb(176, 226, 210);
+  width: 300px;
+  height: 550px;
+}
+
+.profile{
+  background-color: rgb(97, 180, 154);
+  width: 300px;
+  height: 250px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.searchbar{
+  border-radius: 10px;
+  border: none;
+  margin-top: 15px;
+}
+
+.person{
+  width: 130px;
+  height: 130px;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 32%;
+}
+
+.icon{
+  width: 100px;
+  height: 100px;
+}
+
+.logo{
+  height: 150px;
+  width: 210px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 50px;
+}
+
+table{
+  border-collapse: collapse;
   width: 100%;
   height: 100%;
 }
@@ -22,5 +74,4 @@ justify-content: center;
 
 .user{
   color: rgb(184, 12, 12);
-  width: ;
 }
