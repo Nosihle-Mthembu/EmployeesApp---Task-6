@@ -1,130 +1,26 @@
-#root {
-  width: 2280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-h2{
-  font-size: 2rem;
-}
-
-.form{
-  background-color: rgb(225, 236, 225);
-  width: 400px;
-  height: 550px;
-}
-
-.btn{
-  margin-top: 20px;
-}
-
-input{
-  width: 150px;
-  height: 35px;
-}
-
-.details{
-  display: flex;
-  align-content: center;
-  justify-content: space-around;
-  margin-top: 10px;
-}
-
-/* .image{
-  background-image: url("./assets/Rb.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 500px;
-  height: 550px;
-} */
-
-.regpic{
-  display: flex;
-}
-
-
-/* Landing Page */
-.employees{
-  background-color: azure;
-  width: 850px;
-  height: 550px;
-}
-
-ul{
-  list-style-type: none;
+*{
   margin: 0;
-  padding:0;
-  display: flex;
-}
+  padding: 0;
+  box-sizing: border-box;
 
-li {
-  margin-top: 20px;
-  float: left;
 }
-
-li a{
-  padding: 14px 16px;
-  text-decoration: none;
-  color: black;
-}
-
-.search{
-  background-color: rgb(176, 226, 210);
-  width: 300px;
-  height: 550px;
-}
-
-.profile{
-  background-color: rgb(97, 180, 154);
-  width: 300px;
-  height: 250px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  align-content: center;
-  justify-content: center;
-}
-
-.searchbar{
-  border-radius: 10px;
-  border: none;
-}
-
-.person input{
-  width: 200px;
-  height: 35px;
-  margin-top: 10px;
-}
-
-.frame{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  width: 150px;
-  height: 150px;
-  margin-top: 20px;
-  margin-left: 70px;
-}
-
-.icon{
-  width: 100px;
-  height: 100px;
-}
-
-.logo a{
-  color: black;
-}
-
-table{
-  border-collapse: collapse;
+html,body,#root{
   width: 100%;
-  margin-top: 20px;
+  height: 100%;
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-  text-align: center;
+.HeaderColor{
+background-color: black;
+width: 450%;
+height: 50%;
+display: flex;
+align-content: center;
+justify-content: center;
+/* padding: 20%; */
+
+}
+
+.user{
+  color: rgb(184, 12, 12);
+  width: ;
 }
