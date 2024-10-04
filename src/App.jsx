@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
-    // State to handle employees data
-    const [employees, setEmployees] = useState([]);
+    const [employees, setEmployees] = useState(() => {
+        // Get employees from localStorage or initialize as an empty array
+        const savedEmployees = localStorage.getItem("employees");
+        return savedEmployees ? JSON.parse(savedEmployees) : [];
+    });
     
-    // State to handle search input
     const [searchTerm, setSearchTerm] = useState("");
-
-    // State for employee form
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -18,21 +18,22 @@ const App = () => {
         id: ""
     });
 
-    // State to track whether the form is in edit mode
     const [isEditing, setIsEditing] = useState(false);
 
-    // Function to handle search input change
+    useEffect(() => {
+        // Save employees to localStorage whenever the employees state changes
+        localStorage.setItem("employees", JSON.stringify(employees));
+    }, [employees]);
+
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
     };
 
-    // Function to handle form input change
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setForm({ ...form, [name]: value });
     };
 
-    // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEditing) {
@@ -43,24 +44,21 @@ const App = () => {
             setIsEditing(false);
         } else {
             // Add new employee
-            const newEmployee = { ...form, id: Date.now() }; // Unique ID based on timestamp
+            const newEmployee = { ...form, id: Date.now().toString() }; // Unique ID based on timestamp
             setEmployees([...employees, newEmployee]);
         }
         setForm({ name: "", email: "", phone: "", image: "", position: "", id: "" }); // Reset form
     };
 
-    // Function to handle deleting an employee
     const handleDelete = (id) => {
         setEmployees(employees.filter(employee => employee.id !== id));
     };
 
-    // Function to handle editing an employee
     const handleEdit = (employee) => {
         setForm(employee);
         setIsEditing(true);
     };
 
-    // Filtered employees based on the search term
     const filteredEmployees = employees.filter(employee =>
         employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         employee.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -93,7 +91,7 @@ const App = () => {
                                 <div className="icon">
                                     <i className="fas fa-robot"></i>
                                 </div>
-                                <span>Assistant</span>
+                                <span>Registration Form</span>
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <div>
