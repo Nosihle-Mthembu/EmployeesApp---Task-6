@@ -26,13 +26,13 @@ html, body {
 
 .main {
   display: flex;
-  flex: 1; /* Make the main section take up all available vertical space */
-  flex-direction: column; /* Make sure content stacks correctly */
+  flex: 1;
+  flex-direction: column; 
   width: 100vw;
 }
 
 .section {
-  flex: 1; /* Make the section take up the remaining space */
+  flex: 1;
   padding: 16px;
   overflow-y: auto;
 }
@@ -86,7 +86,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 16px;
-  flex: 1; /* Ensure the grid takes up the remaining vertical space */
+  flex: 1;
 }
 
 .assistant, .info-container {
@@ -94,7 +94,7 @@ html, body {
   padding: 16px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  height: 100%; /* Ensure these containers fill the grid height */
+  height: 100%; 
 }
 
 .assistant .header {
