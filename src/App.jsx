@@ -18,6 +18,9 @@ const App = () => {
         id: ""
     });
 
+    // State to track whether the form is in edit mode
+    const [isEditing, setIsEditing] = useState(false);
+
     // Function to handle search input change
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -32,14 +35,29 @@ const App = () => {
     // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newEmployee = { ...form, id: Date.now() }; // Unique ID based on timestamp
-        setEmployees([...employees, newEmployee]);
+        if (isEditing) {
+            // Update existing employee
+            setEmployees(employees.map(employee => 
+                employee.id === form.id ? form : employee
+            ));
+            setIsEditing(false);
+        } else {
+            // Add new employee
+            const newEmployee = { ...form, id: Date.now() }; // Unique ID based on timestamp
+            setEmployees([...employees, newEmployee]);
+        }
         setForm({ name: "", email: "", phone: "", image: "", position: "", id: "" }); // Reset form
     };
 
     // Function to handle deleting an employee
     const handleDelete = (id) => {
         setEmployees(employees.filter(employee => employee.id !== id));
+    };
+
+    // Function to handle editing an employee
+    const handleEdit = (employee) => {
+        setForm(employee);
+        setIsEditing(true);
     };
 
     // Filtered employees based on the search term
@@ -129,7 +147,7 @@ const App = () => {
                                     />
                                 </div>
                                 <div>
-                                    <button type="submit">Submit</button>
+                                    <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
                                 </div>
                             </form>
                         </div>
@@ -143,8 +161,8 @@ const App = () => {
                                             <span className="label">{employee.position}</span>
                                             <span className="label">{employee.email}</span>
                                             <span className="label">{employee.phone}</span>
+                                            <button onClick={() => handleEdit(employee)}>Edit</button>
                                             <button onClick={() => handleDelete(employee.id)}>Delete</button>
-                                            <button>Edit</button>
                                         </li>
                                     ))
                                 ) : (
