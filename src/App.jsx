@@ -1,183 +1,162 @@
-import React, { useState, useEffect } from 'react';
-import Header from './Components/header';
-import './App.css'
-
-const styles = {
-  container: {
-    maxWidth: '800px',
-    margin: '0 auto',
-    padding: '20px',
-    fontFamily: 'Arial, sans-serif',
-  },
-  header: {
-    textAlign: 'center',
-    color: '#333',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: '20px',
-  },
-  input: {
-    margin: '5px 0',
-    padding: '8px',
-    fontSize: '16px',
-  },
-  button: {
-    margin: '5px 0',
-    padding: '10px',
-    fontSize: '16px',
-    backgroundColor: '#4CAF50',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  employeeList: {
-    listStyle: 'none',
-    padding: 0,
-    display:"grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-  },
-  employeeItem: {
-    border: '1px solid #ddd',
-    margin: '10px 0',
-    padding: '10px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  employeeImage: {
-    width: '50px',
-    height: '50px',
-    objectFit: 'cover',
-    marginRight: '10px',
-  },
-};
+import { useState } from 'react';
+import './App.css';
 
 const App = () => {
-  const [employees, setEmployees] = useState([]);
-  const [formData, setFormData] = useState({
-    id: '',
-    name: '',
-    email: '',
-    phone: '',
-    image: '',
-    position: '',
-  });
-
-  const [editMode, setEditMode] = useState(false);
-
-  useEffect(() => {
-    const storedEmployees = JSON.parse(localStorage.getItem('employees') || '[]');
-    setEmployees(storedEmployees);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('employees', JSON.stringify(employees));
-  }, [employees]);
-
-  const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (editMode) {
-      setEmployees(employees.map(emp => emp.id === formData.id ? formData : emp));
-      setEditMode(false);
-    } else {
-      setEmployees([...employees, { ...formData, id: Date.now().toString() }]);
-    }
-    setFormData({ id: '', name: '', email: '', phone: '', image: '', position: '' });
-  };
-
-  const handleDelete = (id) => {
-    setEmployees(employees.filter(emp => emp.id !== id));
-  };
-
-  const handleEdit = (employee) => {
-    setFormData(employee);
-    setEditMode(true);
-  };
-
-  return (
-    <div style={styles.container}>
-      <Header />
-      <h1 style={styles.header}>Employee Registration</h1>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems:"centre" }}>
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <input
-            style={styles.input}
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Name and Surname"
-            required
-          />
-          <input
-            style={styles.input}
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            placeholder="Email Address"
-            required
-          />
-          <input
-            style={styles.input}
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-            placeholder="Phone Number"
-            required
-          />
-          <input
-            style={styles.input}
-            type="text"
-            name="image"
-            value={formData.image}
-            onChange={handleInputChange}
-            placeholder="Image URL"
-          />
-          <input
-            style={styles.input}
-            type="text"
-            name="position"
-            value={formData.position}
-            onChange={handleInputChange}
-            placeholder="Employee Position"
-            required
-          />
-          <button style={styles.button} type="submit">
-            {editMode ? 'Update Employee' : 'Add Employee'}
-          </button>
-        </form>
-      
-      <div>
-        <ul style={styles.employeeList}>
-          {employees.map(employee => (
-            <li key={employee.id} style={styles.employeeItem}>
-              <div>
-                <img src={employee.image || '/api/placeholder/50/50'} alt={employee.name} style={styles.employeeImage} />
-                <strong>{employee.name}</strong> - {employee.position}
-                <br />
-                Email: {employee.email} | Phone: {employee.phone}
-                <br />
-                ID: {employee.id}
-              </div>
-              <div>
-                <button style={styles.button} onClick={() => handleEdit(employee)}>Edit</button>
-                <button style={styles.button} onClick={() => handleDelete(employee.id)}>Delete</button>
-              </div>
-            </li>
-          ))}
-        </ul></div>
-      </div>
-    </div>
+    // State to handle employees data
+    const [employees, setEmployees] = useState([]);
     
-  );
+    // State to handle search input
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // State for employee form
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        image: "",
+        position: "",
+        id: ""
+    });
+
+    // Function to handle search input change
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
+
+    // Function to handle form input change
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
+    };
+
+    // Function to handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const newEmployee = { ...form, id: Date.now() }; // Unique ID based on timestamp
+        setEmployees([...employees, newEmployee]);
+        setForm({ name: "", email: "", phone: "", image: "", position: "", id: "" }); // Reset form
+    };
+
+    // Function to handle deleting an employee
+    const handleDelete = (id) => {
+        setEmployees(employees.filter(employee => employee.id !== id));
+    };
+
+    // Filtered employees based on the search term
+    const filteredEmployees = employees.filter(employee =>
+        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.phone.includes(searchTerm)
+    );
+
+    return (
+        <div className="container">
+            <main className="main">
+                <section className="section">
+                    <div className="header">
+                        <div>
+                            <h1>Employee App</h1>
+                            <p>A beautiful place to start your day by knowing your co-workers</p>
+                        </div>
+                    </div>
+                    <div className="search-bar">
+                        <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            value={searchTerm} 
+                            onChange={handleSearchChange} 
+                        />
+                        <button>Submit</button>
+                    </div>
+                    <div className="grid">
+                        <div className="assistant">
+                            <div className="header">
+                                <div className="icon">
+                                    <i className="fas fa-robot"></i>
+                                </div>
+                                <span>Assistant</span>
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    <label>Name and Surname</label>
+                                    <input 
+                                        type="text" 
+                                        name="name" 
+                                        value={form.name} 
+                                        onChange={handleInputChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div>
+                                    <label>Email Address</label>
+                                    <input 
+                                        type="email" 
+                                        name="email" 
+                                        value={form.email} 
+                                        onChange={handleInputChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div>
+                                    <label>Phone Number</label>
+                                    <input 
+                                        type="tel" 
+                                        name="phone" 
+                                        value={form.phone} 
+                                        onChange={handleInputChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div>
+                                    <label>Image URL</label>
+                                    <input 
+                                        type="url" 
+                                        name="image" 
+                                        value={form.image} 
+                                        onChange={handleInputChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div>
+                                    <label>Employee Position</label>
+                                    <input 
+                                        type="text" 
+                                        name="position" 
+                                        value={form.position} 
+                                        onChange={handleInputChange} 
+                                        required 
+                                    />
+                                </div>
+                                <div>
+                                    <button type="submit">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="info-container">
+                            <ul>
+                                {filteredEmployees.length > 0 ? (
+                                    filteredEmployees.map(employee => (
+                                        <li key={employee.id}>
+                                            <img src={employee.image} alt={employee.name} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                                            <span className="value">{employee.name}</span>
+                                            <span className="label">{employee.position}</span>
+                                            <span className="label">{employee.email}</span>
+                                            <span className="label">{employee.phone}</span>
+                                            <button onClick={() => handleDelete(employee.id)}>Delete</button>
+                                            <button>Edit</button>
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li>No employees found</li>
+                                )}
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    );
 };
 
 export default App;
