@@ -3,7 +3,6 @@ import './App.css';
 
 const App = () => {
     const [employees, setEmployees] = useState(() => {
-        // Get employees from localStorage or initialize as an empty array
         const savedEmployees = localStorage.getItem("employees");
         return savedEmployees ? JSON.parse(savedEmployees) : [];
     });
@@ -21,7 +20,6 @@ const App = () => {
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
-        // Save employees to localStorage whenever the employees state changes
         localStorage.setItem("employees", JSON.stringify(employees));
     }, [employees]);
 
@@ -37,17 +35,15 @@ const App = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (isEditing) {
-            // Update existing employee
             setEmployees(employees.map(employee => 
                 employee.id === form.id ? form : employee
             ));
             setIsEditing(false);
         } else {
-            // Add new employee
-            const newEmployee = { ...form, id: Date.now().toString() }; // Unique ID based on timestamp
+            const newEmployee = { ...form, id: Date.now().toString() }; 
             setEmployees([...employees, newEmployee]);
         }
-        setForm({ name: "", email: "", phone: "", image: "", position: "", id: "" }); // Reset form
+        setForm({ name: "", email: "", phone: "", image: "", position: "", id: "" }); 
     };
 
     const handleDelete = (id) => {
@@ -83,7 +79,7 @@ const App = () => {
                             value={searchTerm} 
                             onChange={handleSearchChange} 
                         />
-                        <button>Submit</button>
+                        <button style={{backgroundColor:"lightblue"}}>Submit</button>
                     </div>
                     <div className="grid">
                         <div className="assistant">
@@ -91,7 +87,7 @@ const App = () => {
                                 <div className="icon">
                                     <i className="fas fa-robot"></i>
                                 </div>
-                                <span>Registration Form</span>
+                                <h1>Registration Form</h1>
                             </div>
                             <form onSubmit={handleSubmit}>
                                 <div>
@@ -145,7 +141,7 @@ const App = () => {
                                     />
                                 </div>
                                 <div>
-                                    <button type="submit">{isEditing ? 'Update' : 'Submit'}</button>
+                                    <button style={{backgroundColor:"lightblue"}} type="submit">{isEditing ? 'Update' : 'Submit'}</button>
                                 </div>
                             </form>
                         </div>
@@ -159,8 +155,8 @@ const App = () => {
                                             <span className="label">{employee.position}</span>
                                             <span className="label">{employee.email}</span>
                                             <span className="label">{employee.phone}</span>
-                                            <button onClick={() => handleEdit(employee)}>Edit</button>
-                                            <button onClick={() => handleDelete(employee.id)}>Delete</button>
+                                            <button onClick={() => handleEdit(employee)} style={{backgroundColor:"lightblue"}}>Edit</button>
+                                            <button onClick={() => handleDelete(employee.id)} style={{backgroundColor:"red"}}>Delete</button>
                                         </li>
                                     ))
                                 ) : (
