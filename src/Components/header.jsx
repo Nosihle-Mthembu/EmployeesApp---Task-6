@@ -1,22 +1,18 @@
 import React from 'react';
-// import './Header.css';
+import SearchComponent from './search';
 
 const Header = () => {
   return (
-    <div class="main-container">
-        <header class="header">
-            <div class="user-profile">
-            <img src="user-profile.jpg" alt="image" class="profile-pic" />
-            <h1>John Doe</h1>
-            <p>Senior Software Engineer</p>
-            </div>
-            <div class="search-bar">
-            <input type="text" placeholder="Search..." />
-            <button>Search</button>
-            </div>
-        </header>
+    <div className="santorini-component">
+      {/* <img src="santorini-image.jpg" alt="Santorini"> */}
+      <div className="overlay">
+        <h1>Santorini</h1>
+        <p>A beautiful city located in the Aegean Sea, Greece.</p>
+        <div className="tabs">
+          <SearchComponent />
+        </div>
+      </div>
     </div>
-
   );
 };
 
